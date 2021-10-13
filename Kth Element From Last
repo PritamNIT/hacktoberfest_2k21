@@ -1,0 +1,123 @@
+#include<iostream>
+using namespace std;
+
+struct node
+{
+    int data;
+    node *next;
+};
+node *head=NULL;
+node* getnode()
+{
+    int data1;
+    node* newnode=new node;
+    cout<<"Enter data : ";
+    cin>>data1;
+    newnode->data=data1;
+    newnode->next=NULL;
+}
+
+//Create Slinked lidt
+
+void createlist(int n)
+{
+    node *newnode,*temp;
+    for(int i=0;i<n;i++)
+    {
+    newnode=getnode();
+    temp=head;
+    if(head==NULL)
+    {
+        head=newnode;
+    }
+    else{
+    while(temp->next!=NULL)
+    {
+
+    temp=temp->next;
+    }
+    temp->next=newnode;
+    }
+    }
+    cout<<"Elements are Inserted Successfully. "<<endl;
+}
+
+void display(node *head)
+{
+   node *temp;
+   temp=head;
+   if(head==NULL)
+   {
+       cout<<"Linklist is Empty "<<endl;
+   }
+   else
+   {
+       cout<<"Linked List Elements Are : "<<endl;
+       while(temp!=NULL)
+       {
+           cout<<temp->data<<" -> ";
+           temp=temp->next;
+       }
+       cout<<endl;
+
+   }
+}
+node* kthlast(node *head,int pos)
+   {
+
+       int l=0;
+       node *ptemp,*kthnode;
+       ptemp=head;
+       kthnode=head;
+       while(ptemp!=NULL)
+       {
+           l++;
+           ptemp=ptemp->next;
+       }
+          ptemp=head;
+       if(pos>l || pos<1)
+       {
+           cout<<"Invalid postion .";
+           return NULL;
+          }
+          else{
+        while(--pos)
+    {
+
+        ptemp=ptemp->next;
+    }
+
+
+    while(ptemp->next!=NULL)
+    {
+        ptemp=ptemp->next;
+        kthnode=kthnode->next;
+    }
+
+
+   // cout<<"Kth Elements from last of list is : "<<prev->data;
+   return kthnode;
+
+          }
+   }
+
+   int main()
+   {
+
+       int n;
+       cout<<"Enter no. of node ";
+       cin>>n;
+       createlist( n);
+       display(head);\
+       int pos;
+       cout<<"Enter postion (kth element from last of list) : ";
+       cin>>pos;
+      node *ele= kthlast(head,pos);
+      cout<<"Kth from last is  : "<<ele->data;
+
+       return 0;
+
+
+
+   }
+
