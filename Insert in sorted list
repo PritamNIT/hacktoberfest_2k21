@@ -1,0 +1,119 @@
+#include<iostream>
+using namespace std;
+
+struct node{
+int data;
+node *next;
+};
+node *head=NULL;
+node* getnode()
+{
+
+    node *newnode;
+    newnode=new node;
+    cout<<"Enter data : ";
+    cin>>newnode->data;
+    newnode->next=NULL;
+
+}
+void create(int n)
+{
+    node *newnode,*temp;
+
+    for(int i=0;i<n;i++)
+    {
+    newnode=getnode();
+    if(head==NULL)
+    {
+        head=newnode;
+    }
+    else
+    {
+          temp=head;
+        while(temp->next!=NULL)
+        {
+            temp=temp->next;
+        }
+        temp->next=newnode;
+    }
+    }
+}
+
+int length()
+{
+    int l=0;
+    node *temp;
+    temp=head;
+    while(temp!=NULL)
+    {
+        l++;
+        temp=temp->next;
+    }
+    return l;
+}
+void display()
+{
+    node *temp;
+    temp=head;
+    if(head==NULL)
+       {
+           cout<<"List is Empty .";
+
+       }
+        else
+        {
+            cout<<"\nList Elements are : \n";
+
+            while(temp!=NULL)
+            {
+                cout<<temp->data<<"->";
+                temp=temp->next;
+            }
+            cout<<"\n";      }
+}
+
+void insert_sort_list(node** head)
+{
+    node *newnode;
+    newnode=getnode();
+
+    if(*head==NULL || (*head)->data >= newnode->data)
+    {
+        newnode->next=*head;
+        *head=newnode;
+                                                                                                                                                                               ;
+    }
+    else{
+    node *temp=*head;
+
+        while(temp->next!=NULL && temp->next->data<newnode->data)
+        {
+
+            temp=temp->next;
+        }
+        newnode->next=temp->next;
+        temp->next=newnode;
+    }
+
+    cout<<"\nInserted in sorted list";
+}
+
+
+int main()
+{
+
+    int n;
+    cout<<"Enter No. of nodes : ";
+    cin>>n;
+    create(n);
+    display();
+
+    cout<<"\nEnter element to insert in sorted List\n ";
+
+     insert_sort_list(&head);
+    display();
+
+    return 0;
+
+}
+
